@@ -70,10 +70,13 @@ def print_tree_with_depth(id, depth, notes):
 @click.command()
 @click.option('--id', default='5b6605a886ec2e1a5a713867', help='id of a Node')
 @click.option('--title', help='Title to search')
-@click.option('--depth', default=0, help='Depth of the tree to show')
+@click.option('--depth', prompt=True, default=0, help='Depth of the tree to show')
 @click.option('--notes', is_flag=True)
 def print_tree(id, title, depth, notes):
-    if depth > 0 and depth <= 5:
+    if title:
+        # TODO: implement
+        pass
+    elif depth > 0 and depth <= 5:
         print_tree_with_depth(id, depth, notes)
 
 if __name__ == '__main__':

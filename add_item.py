@@ -15,7 +15,7 @@ def addItemAsChild(parent_id, child_id):
     return item
         
 @click.command()
-@click.option('--id', help='id of a new node')
+@click.option('--id', prompt=True, help='id of the parent node')
 @click.option('--title', prompt=True, help='title of the node')
 def add_item(id, title):
     if id is not None and title is not None:
