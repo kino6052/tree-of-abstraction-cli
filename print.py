@@ -18,12 +18,14 @@ def getNotesForItem(id):
         notes.append(note)
     return notes
     
-def printNotesForItem(id):
+def printNotesForItem(id, indent):
     item_notes = requests.get('{}/item-note?itemId={}'.format(URL, id)).json()
     for item_note in item_notes:
         note_id = item_note[u'noteId']
         note = requests.get('{}/note/{}'.format(URL, note_id)).json()[0]
-        click.secho(note[u'title'])
+        click.secho(note[u'title'], fg='white', bg='black')
+        click.secho(note[u'_id'] + '\n')
+        click.secho(note[u'content'])
 
 def getNode(id_tuple):
     id = id_tuple[0]
@@ -59,7 +61,7 @@ def print_tree_with_depth(id, depth, notes):
                 continue
             json_node = getNode(cur_id);
             if notes:
-                printNotesForItem(cur_id[0])
+                printNotesForItem(cur_id[0], indent + 1)
             children = getChildren(json_node, indent + 1);
             stack = stack + children
         except Exception:
@@ -68,7 +70,7 @@ def print_tree_with_depth(id, depth, notes):
         
         
 @click.command()
-@click.option('--id', default='5b6605a886ec2e1a5a713867', help='id of a Node')
+@click.option('--id', prompt=True, default='5b6605a886ec2e1a5a713867', help='id of a Node')
 @click.option('--title', help='Title to search')
 @click.option('--depth', prompt=True, default=0, help='Depth of the tree to show')
 @click.option('--notes', is_flag=True)
