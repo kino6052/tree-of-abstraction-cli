@@ -7,7 +7,9 @@ URL = 'https://personal-dashboard-umbrella-kino6052.c9users.io'
 
 def getCalendarEvent(year, month, day):
     item = requests.get('{}/calendar/{}/{}/{}'.format(URL, year, month, day)).json()
-    return item[0]
+    if len(item) > 0:
+        return item
+    return []
         
         
 @click.command()
@@ -18,6 +20,6 @@ def print_calendar_event(year, month, day):
     print getCalendarEvent(year, month, day);
 
 if __name__ == '__main__':
-    print_calendar_event(year, month, day)
+    print_calendar_event()
     
 # 5b6605a886ec2e1a5a713867
