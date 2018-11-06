@@ -28,7 +28,6 @@ def add_item(id, title):
     if id is not None and title is not None:
         content = click.edit('Enter text of the note')
         note = create_note(title, content)
-        pdb.set_trace()
         note_id = note[u'_id']
         connect_item_and_note(id, note_id)
 if __name__ == '__main__':

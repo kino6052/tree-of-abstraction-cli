@@ -77,7 +77,7 @@ def print_tree_with_depth(id, depth, notes):
 @click.option('--id', prompt=True, default='5b6605a886ec2e1a5a713867', help='id of a Node')
 @click.option('--title', help='Title to search')
 @click.option('--depth', prompt=True, default=0, help='Depth of the tree to show')
-@click.option('--notes', is_flag=True)
+@click.option('--notes', is_flag=True, help='Show notes')
 def print_tree(id, title, depth, notes):
     id = id.encode('utf-8')
     if title:
