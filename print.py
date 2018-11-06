@@ -8,6 +8,10 @@ URL = 'https://personal-dashboard-umbrella-kino6052.c9users.io'
 def getItem(id):
     item = requests.get('{}/item/{}'.format(URL, id)).json()
     return item[0]
+    
+def getItemByTitle(title):
+    item = requests.get('{}/item?title={}'.format(URL, title)).json()
+    return item[0]
 
 def getNotesForItem(id):
     notes = []
@@ -75,9 +79,12 @@ def print_tree_with_depth(id, depth, notes):
 @click.option('--depth', prompt=True, default=0, help='Depth of the tree to show')
 @click.option('--notes', is_flag=True)
 def print_tree(id, title, depth, notes):
+    id = id.encode('utf-8')
     if title:
-        # TODO: implement
-        pass
+        title = title.encode('utf-8')
+        item = getItemByTitle(title)
+        item_id = item[u'_id']
+        print_tree_with_depth(item_id, depth, notes)
     elif depth > 0 and depth <= 5:
         print_tree_with_depth(id, depth, notes)
 
