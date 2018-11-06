@@ -17,7 +17,9 @@ def getCalendarEvent(year, month, day):
 @click.option('--month', prompt=True, default=1, help='Month of the Event')
 @click.option('--day', prompt=True, default=1, help='Day of the Event')
 def print_calendar_event(year, month, day):
-    print getCalendarEvent(year, month, day);
+    calendar_events = getCalendarEvent(year, month, day);
+    for event in calendar_events:
+        click.secho(' {} \n'.format(event[u'title']), fg='red', bg='white', nl=False)
 
 if __name__ == '__main__':
     print_calendar_event()
